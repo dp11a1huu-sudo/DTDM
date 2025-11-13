@@ -1,0 +1,12 @@
+options { directory "/var/cache/bind"; allow-query { any; }; recursion yes; }; 
+EOF 
+cat > internal-dns-server/named.conf.local <<'EOF' 
+zone "cloud.local" IN { type master; file "/etc/bind/db.cloud.local"; }; 
+EOF 
+cat > internal-dns-server/db.cloud.local <<'EOF' 
+$TTL 1H 
+@   IN SOA  ns.cloud.local. admin.cloud.local. ( 1 1H 15M 1W 1H ) 
+IN NS   ns.cloud.local. 
+ns  IN A    127.0.0.1 
+web-frontend-server IN A 10.10.10.10 
+EOF 
