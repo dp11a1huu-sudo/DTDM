@@ -2,7 +2,7 @@ networks: { cloud-net: { name: cloud-net } }
 services:
   web-frontend-server:
     build: ./web-frontend-server
-    image: hotensv/web:dev
+    image: GiangAnDung/web:dev
     container_name: web-frontend-server
     networks: [cloud-net]
     ports:
@@ -12,7 +12,7 @@ services:
 
   application-backend-server:
     build: ./application-backend-server
-    image: hotensv/app:dev
+    image: GiangAnDung/app:dev
     container_name: application-backend-server
     networks: [cloud-net]
     ports: ["8085:8081"]
