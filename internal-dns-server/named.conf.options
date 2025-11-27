@@ -3,7 +3,14 @@ options {
     listen-on port 53 { any; };
     listen-on-v6 { none; };
     allow-query { any; };
-    recursion no;
+    recursion yes;
     dnssec-validation no;
     empty-zones-enable no;
+
+    // Forward queries we can't resolve to Google DNS
+    forwarders {
+        8.8.8.8;
+        8.8.4.4;
+    };
+    forward only;
 };

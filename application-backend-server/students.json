@@ -1,0 +1,7 @@
+[
+  {"id": "SV001", "name": "Nguyen Van A", "major": "CNTT", "gpa": 3.5},
+  {"id": "SV002", "name": "Tran Thi B", "major": "KTPM", "gpa": 3.8},
+  {"id": "SV003", "name": "Le Van C", "major": "HTTT", "gpa": 3.2},
+  {"id": "SV004", "name": "Pham Thi D", "major": "KHMT", "gpa": 3.6},
+  {"id": "SV005", "name": "Hoang Van E", "major": "MMT", "gpa": 3.0}
+]
