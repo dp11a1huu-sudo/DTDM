@@ -9,6 +9,13 @@ services:
       - "8080:80"
     restart: unless-stopped
 
+  # Phần mở rộng
+  web-frontend-server-2:
+    build: ./web-frontend-server
+    image: GianAnDung/web:dev
+    container_name: web-frontend-server-2
+    networks: [cloud-net]
+    restart: unless-stopped
 
   application-backend-server:
     build: ./application-backend-server
