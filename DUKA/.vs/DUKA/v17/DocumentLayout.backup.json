@@ -1,0 +1,489 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\CNPM_SANBONG\\DUKA\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|c:\\cnpm_sanbong\\duka\\gui\\mainmenu.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\mainmenu.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\mainmenu.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\mainmenu.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\forms\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\forms\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|c:\\cnpm_sanbong\\duka\\gui\\forms\\bookingdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\forms\\bookingdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|c:\\cnpm_sanbong\\duka\\gui\\controls\\employeecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\employeecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|c:\\cnpm_sanbong\\duka\\gui\\controls\\customermanagementcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\customermanagementcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|c:\\cnpm_sanbong\\duka\\gui\\controls\\bookingmanagementcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\bookingmanagementcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\forms\\bookingdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\forms\\bookingdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|C:\\CNPM_SANBONG\\DUKA\\dal\\dataprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|solutionrelative:dal\\dataprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|c:\\cnpm_sanbong\\duka\\dal\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|solutionrelative:dal\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|C:\\CNPM_SANBONG\\DUKA\\dal\\dal_project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|solutionrelative:dal\\dal_project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|c:\\cnpm_sanbong\\duka\\dal\\confighelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F97730-13A4-491B-AEF3-CA1D90974001}|DAL\\DAL.csproj|solutionrelative:dal\\confighelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C532F61F-DE14-4F0F-BDBA-1D61495EF7A1}|BUS\\BUS.csproj|C:\\CNPM_SANBONG\\DUKA\\bus\\bus_project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C532F61F-DE14-4F0F-BDBA-1D61495EF7A1}|BUS\\BUS.csproj|solutionrelative:bus\\bus_project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85A07159-1D43-4E0F-B6D1-5282A14EAEC5}|DTO\\DTO.csproj|C:\\CNPM_SANBONG\\DUKA\\dto\\dto_project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85A07159-1D43-4E0F-B6D1-5282A14EAEC5}|DTO\\DTO.csproj|solutionrelative:dto\\dto_project.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|c:\\cnpm_sanbong\\duka\\gui\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\forms\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\controls\\headercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\headercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\controls\\rentalequipmentmanagementcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\rentalequipmentmanagementcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\resources\\logo_sanbong.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\resources\\logo_sanbong.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\controls\\helpcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\helpcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\controls\\helpcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\helpcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\controls\\reportcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\reportcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\controls\\reportcontrol.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\reportcontrol.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\controls\\reportcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\controls\\reportcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\forms\\fielddetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\forms\\fielddetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\properties\\resources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\properties\\resources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\duka_logo.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\duka_logo.jpg||{58961B49-13E0-48C0-9258-13CBC4D40279}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|C:\\CNPM_SANBONG\\DUKA\\gui\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5549DEBD-BAEE-46EB-A133-99E28DB22659}|GUI\\GUI.csproj|solutionrelative:gui\\mainmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 101,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainMenu.resx",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.resx",
+              "RelativeDocumentMoniker": "GUI\\MainMenu.resx",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.resx",
+              "RelativeToolTip": "GUI\\MainMenu.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-11-28T06:45:58.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EmployeeControl.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\EmployeeControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\EmployeeControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\EmployeeControl.cs [Design]",
+              "RelativeToolTip": "GUI\\Controls\\EmployeeControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:25:03.724Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomerManagementControl.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\CustomerManagementControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\CustomerManagementControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\CustomerManagementControl.cs [Design]",
+              "RelativeToolTip": "GUI\\Controls\\CustomerManagementControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:25:01.787Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BookingManagementControl.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\BookingManagementControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\BookingManagementControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\BookingManagementControl.cs [Design]",
+              "RelativeToolTip": "GUI\\Controls\\BookingManagementControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:24:54.785Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BookingDetailForm.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\BookingDetailForm.cs",
+              "RelativeDocumentMoniker": "GUI\\Forms\\BookingDetailForm.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\BookingDetailForm.cs",
+              "RelativeToolTip": "GUI\\Forms\\BookingDetailForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T06:24:44.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginForm.Designer.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\LoginForm.Designer.cs",
+              "RelativeDocumentMoniker": "GUI\\Forms\\LoginForm.Designer.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\LoginForm.Designer.cs",
+              "RelativeToolTip": "GUI\\Forms\\LoginForm.Designer.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAswOcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T16:47:07.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainMenu.Designer.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.Designer.cs",
+              "RelativeDocumentMoniker": "GUI\\MainMenu.Designer.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.Designer.cs",
+              "RelativeToolTip": "GUI\\MainMenu.Designer.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAACsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T17:12:04.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DatabaseConnection.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\DAL\\DatabaseConnection.cs",
+              "RelativeDocumentMoniker": "DAL\\DatabaseConnection.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\DAL\\DatabaseConnection.cs",
+              "RelativeToolTip": "DAL\\DatabaseConnection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T04:45:50.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ConfigHelper.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\DAL\\ConfigHelper.cs",
+              "RelativeDocumentMoniker": "DAL\\ConfigHelper.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\DAL\\ConfigHelper.cs",
+              "RelativeToolTip": "DAL\\ConfigHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T04:45:47.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LoginForm.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "GUI\\Forms\\LoginForm.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\LoginForm.cs [Design]",
+              "RelativeToolTip": "GUI\\Forms\\LoginForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T16:46:15.052Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DTO_Project.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\DTO\\DTO_Project.cs",
+              "RelativeDocumentMoniker": "DTO\\DTO_Project.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\DTO\\DTO_Project.cs",
+              "RelativeToolTip": "DTO\\DTO_Project.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T16:38:37.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "BUS_Project.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\BUS\\BUS_Project.cs",
+              "RelativeDocumentMoniker": "BUS\\BUS_Project.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\BUS\\BUS_Project.cs",
+              "RelativeToolTip": "BUS\\BUS_Project.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T16:38:01.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DataProvider.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\DAL\\DataProvider.cs",
+              "RelativeDocumentMoniker": "DAL\\DataProvider.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\DAL\\DataProvider.cs",
+              "RelativeToolTip": "DAL\\DataProvider.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAawBkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T16:36:04.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BookingDetailForm.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\BookingDetailForm.cs",
+              "RelativeDocumentMoniker": "GUI\\Forms\\BookingDetailForm.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\BookingDetailForm.cs [Design]",
+              "RelativeToolTip": "GUI\\Forms\\BookingDetailForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:21:34.037Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "HelpControl.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\HelpControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\HelpControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\HelpControl.cs [Design]",
+              "RelativeToolTip": "GUI\\Controls\\HelpControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:35:14.405Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\LoginForm.cs",
+              "RelativeDocumentMoniker": "GUI\\Forms\\LoginForm.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\LoginForm.cs",
+              "RelativeToolTip": "GUI\\Forms\\LoginForm.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAswIIAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T16:46:39.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DAL_Project.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\DAL\\DAL_Project.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL_Project.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\DAL\\DAL_Project.cs",
+              "RelativeToolTip": "DAL\\DAL_Project.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAIAxwBoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T16:48:43.158Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MainMenu.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.cs",
+              "RelativeDocumentMoniker": "GUI\\MainMenu.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.cs [Design]",
+              "RelativeToolTip": "GUI\\MainMenu.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T16:36:15.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "HeaderControl.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\HeaderControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\HeaderControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\HeaderControl.cs [Design]",
+              "RelativeToolTip": "GUI\\Controls\\HeaderControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:49:07.642Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "HelpControl.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\HelpControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\HelpControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\HelpControl.cs",
+              "RelativeToolTip": "GUI\\Controls\\HelpControl.cs",
+              "ViewState": "AgIAAPUAAAAAAAAAAAAqwCoBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:35:18.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "RentalEquipmentManagementControl.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\RentalEquipmentManagementControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\RentalEquipmentManagementControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\RentalEquipmentManagementControl.cs [Design]",
+              "RelativeToolTip": "GUI\\Controls\\RentalEquipmentManagementControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:35:28.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "ReportControl.Designer.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\ReportControl.Designer.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\ReportControl.Designer.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\ReportControl.Designer.cs",
+              "RelativeToolTip": "GUI\\Controls\\ReportControl.Designer.cs",
+              "ViewState": "AgIAAJUFAAAAAAAAAAAgwBYGAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:26:05.808Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "logo_sanbong.jpg",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Resources\\logo_sanbong.jpg",
+              "RelativeDocumentMoniker": "GUI\\Resources\\logo_sanbong.jpg",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Resources\\logo_sanbong.jpg",
+              "RelativeToolTip": "GUI\\Resources\\logo_sanbong.jpg",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-11-28T03:37:44.324Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ReportControl.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\ReportControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\ReportControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\ReportControl.cs",
+              "RelativeToolTip": "GUI\\Controls\\ReportControl.cs",
+              "ViewState": "AgIAANgAAAAAAAAAAAAgwO0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:23:57.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ReportControl.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\ReportControl.cs",
+              "RelativeDocumentMoniker": "GUI\\Controls\\ReportControl.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Controls\\ReportControl.cs [Design]",
+              "RelativeToolTip": "GUI\\Controls\\ReportControl.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:23:52.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "FieldDetailForm.cs [Design]",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\FieldDetailForm.cs",
+              "RelativeDocumentMoniker": "GUI\\Forms\\FieldDetailForm.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Forms\\FieldDetailForm.cs [Design]",
+              "RelativeToolTip": "GUI\\Forms\\FieldDetailForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T03:21:36.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DUKA_LOGO.jpg",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\DUKA_LOGO.jpg",
+              "RelativeDocumentMoniker": "GUI\\DUKA_LOGO.jpg",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\DUKA_LOGO.jpg",
+              "RelativeToolTip": "GUI\\DUKA_LOGO.jpg",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-11-28T03:02:36.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Resources.resx",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Properties\\Resources.resx",
+              "RelativeDocumentMoniker": "GUI\\Properties\\Resources.resx",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\Properties\\Resources.resx",
+              "RelativeToolTip": "GUI\\Properties\\Resources.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-11-20T17:00:24.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "MainMenu.cs",
+              "DocumentMoniker": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.cs",
+              "RelativeDocumentMoniker": "GUI\\MainMenu.cs",
+              "ToolTip": "C:\\CNPM_SANBONG\\DUKA\\GUI\\MainMenu.cs",
+              "RelativeToolTip": "GUI\\MainMenu.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAuwB8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T16:36:19.28Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+C:\CNPM_SANBONG\DUKA\BUS\bin\Debug\BUS.dll
+C:\CNPM_SANBONG\DUKA\BUS\bin\Debug\BUS.pdb
+C:\CNPM_SANBONG\DUKA\BUS\bin\Debug\DAL.dll
+C:\CNPM_SANBONG\DUKA\BUS\bin\Debug\DTO.dll
+C:\CNPM_SANBONG\DUKA\BUS\bin\Debug\DAL.pdb
+C:\CNPM_SANBONG\DUKA\BUS\bin\Debug\DTO.pdb
+C:\CNPM_SANBONG\DUKA\BUS\obj\Debug\BUS.csproj.AssemblyReference.cache
+C:\CNPM_SANBONG\DUKA\BUS\obj\Debug\BUS.csproj.CoreCompileInputs.cache
+C:\CNPM_SANBONG\DUKA\BUS\obj\Debug\BUS.csproj.Up2Date
+C:\CNPM_SANBONG\DUKA\BUS\obj\Debug\BUS.dll
+C:\CNPM_SANBONG\DUKA\BUS\obj\Debug\BUS.pdb

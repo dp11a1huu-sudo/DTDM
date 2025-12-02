@@ -1,0 +1,57 @@
+═══════════════════════════════════════════════════════════════
+HƯỚNG DẪN THÊM LOGO DUKA_logo.jpg VÀO TẤT CẢ CÁC FORM
+═══════════════════════════════════════════════════════════════
+
+ĐÃ HOÀN THÀNH:
+✅ Đã thêm PictureBox vào tất cả các form:
+   - LoginForm
+   - RegisterForm
+   - ForgotPasswordForm
+   - VerificationCodeForm
+   - ResetPasswordForm
+
+✅ Đã thêm method LoadLogo() vào tất cả các form
+
+BƯỚC 1: CHUẨN BỊ FILE LOGO
+───────────────────────────
+1. Đặt file logo vào thư mục: D:\52300\DUKA-main\GUI\
+2. Đặt tên file: DUKA_logo.jpg
+   (Lưu ý: Tên file phải là DUKA_logo.jpg - có dấu gạch dưới)
+
+BƯỚC 2: CHẠY SCRIPT TỰ ĐỘNG
+─────────────────────────────
+1. Mở PowerShell
+2. Điều hướng đến thư mục GUI:
+   cd D:\52300\DUKA-main\GUI
+3. Chạy script:
+   .\AddLogo.ps1
+
+Nếu bị chặn, chạy lệnh này trước:
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+BƯỚC 3: REBUILD PROJECT
+─────────────────────────
+1. Mở Visual Studio
+2. Build -> Rebuild Solution (Ctrl+Shift+B)
+3. Đợi quá trình build hoàn tất
+
+BƯỚC 4: KIỂM TRA
+─────────────────
+1. Chạy ứng dụng
+2. Logo sẽ tự động hiển thị trong tất cả các form:
+   - Form đăng nhập
+   - Form đăng ký
+   - Form quên mật khẩu
+   - Form mã xác minh
+   - Form đặt lại mật khẩu
+
+═══════════════════════════════════════════════════════════════
+LƯU Ý:
+═══════════════════════════════════════════════════════════════
+- Tên file logo PHẢI là: DUKA_logo.jpg (có dấu gạch dưới)
+- Tên resource trong Resources.resx sẽ là: DUKA_Logo (có dấu gạch dưới)
+- Nếu không tìm thấy logo, PictureBox sẽ tự động ẩn
+- Logo sẽ hiển thị ở vị trí trên text "DUKA" trong panel trái
+
+═══════════════════════════════════════════════════════════════
+

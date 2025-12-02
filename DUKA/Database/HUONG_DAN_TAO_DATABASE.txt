@@ -1,0 +1,41 @@
+═══════════════════════════════════════════════════════════════
+HƯỚNG DẪN TẠO DATABASE DUKA_FootballManagement
+═══════════════════════════════════════════════════════════════
+
+BƯỚC 1: MỞ SQL SERVER MANAGEMENT STUDIO (SSMS)
+─────────────────────────────────────────────────
+1. Mở SQL Server Management Studio
+2. Kết nối đến SQL Server trên localhost:
+   - Server name: localhost (hoặc . hoặc tên máy)
+   - Authentication: Windows Authentication
+
+BƯỚC 2: TẠO DATABASE
+─────────────────────
+1. Mở file: Database/CREATE_DATABASE.sql
+2. Chạy script (F5 hoặc Execute)
+3. Kiểm tra kết quả: Database "DUKA_FootballManagement" đã được tạo
+
+BƯỚC 3: TẠO CÁC BẢNG
+─────────────────────
+1. Mở file: Database/DUKA_Database_Schema.sql
+2. Chạy toàn bộ script (F5 hoặc Execute)
+3. Kiểm tra: Tất cả 14 bảng đã được tạo thành công
+
+BƯỚC 4: KIỂM TRA KẾT NỐI
+─────────────────────────
+1. Chạy ứng dụng
+2. Nếu vẫn lỗi, kiểm tra:
+   - SQL Server đang chạy
+   - Database đã được tạo đúng tên: DUKA_FootballManagement
+   - User Windows có quyền truy cập database
+
+LƯU Ý:
+──────
+- Tên database phải chính xác: DUKA_FootballManagement
+- Nếu dùng SQL Authentication, cập nhật trong DatabaseConnection.cs:
+  useWindowsAuth = false
+  username = "sa"
+  password = "mật khẩu của bạn"
+
+═══════════════════════════════════════════════════════════════
+

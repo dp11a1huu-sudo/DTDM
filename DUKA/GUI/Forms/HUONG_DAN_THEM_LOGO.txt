@@ -1,0 +1,35 @@
+HƯỚNG DẪN THÊM LOGO VÀO CÁC FORM
+=====================================
+
+Đã thêm PictureBox vào LoginForm. Logo sẽ được load từ Resources.
+
+CÁCH THÊM LOGO VÀO RESOURCES:
+------------------------------
+1. Mở Visual Studio
+2. Trong Solution Explorer, mở Properties/Resources.resx
+3. Click "Add Resource" > "Add Existing File..."
+4. Chọn file logo của bạn (PNG, JPG, ICO...)
+5. Đặt tên cho resource là "DUKA_Logo" (quan trọng: tên phải chính xác)
+6. Save file Resources.resx
+7. Code sẽ tự động load logo từ Resources
+
+LƯU Ý:
+- Logo sẽ hiển thị ở vị trí trên text "DUKA"
+- Nếu không tìm thấy logo trong Resources, PictureBox sẽ tự động ẩn và chỉ hiển thị text
+- Kích thước PictureBox: 200x150 pixels
+- SizeMode: Zoom (tự động scale để vừa khung)
+- Tên resource phải là "DUKA_Logo" (không có khoảng trắng, phân biệt hoa thường)
+
+ÁP DỤNG CHO CÁC FORM KHÁC:
+---------------------------
+Bạn có thể áp dụng tương tự cho các form khác:
+- RegisterForm
+- ForgotPasswordForm
+- VerificationCodeForm
+- ResetPasswordForm
+
+Chỉ cần:
+1. Thêm PictureBox vào Designer (tương tự LoginForm)
+2. Thêm method LoadLogo() vào file .cs
+3. Gọi LoadLogo() trong constructor
+

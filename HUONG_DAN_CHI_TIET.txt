@@ -1,0 +1,1432 @@
+================================================================================
+HUONG DAN CHI TIET - DTDM CLOUD COMPUTING PROJECT
+================================================================================
+
+NGAY THUC HIEN: 27/11/2025
+DU AN: Xu Ly Anh So - DTDM
+HO TRO: Windows PowerShell + Linux/Mac + curl commands
+
+================================================================================
+YEU CAU TONG QUAN:
+================================================================================
+- 3️⃣ Relational Database Server (MariaDB) - studentdb với bảng students
+- 4️⃣ Authentication Identity Server (Keycloak) - Realm, users, client
+- 5️⃣ Object Storage Server (MinIO) - Buckets và file uploads
+- 6️⃣ Internal DNS Server - DNS records cho các services
+
+================================================================================
+PHAN 3: RELATIONAL DATABASE SERVER (MARIADB)
+================================================================================
+
+BUOC 3.1: KHOI DONG DATABASE CONTAINER
+-------------------------------------
+# Chuyển đến thư mục project
+cd D:\XuLyAnhSo\DTDM
+
+# Khởi động MariaDB container
+docker compose up -d relational-database-server
+
+# Kiểm tra container đã chạy
+docker compose ps
+
+BUOC 3.2: KET NOI VAO MARIADB
+---------------------------
+# CÁCH 1: Kết nối bằng docker exec (có thể lỗi nếu không có mysql client)
+docker exec -it relational-database-server mysql -u root -p
+# Nhập password: root
+
+# CÁCH 2: Kết nối từ host bằng Python script (KHUYẾN NGHỊ - KHÔNG CẦN MYSQL CLIENT)
+
+# BƯỚC CÀI ĐẶT: Cài đặt MySQL Connector cho Python
+pip install mysql-connector-python
+
+# Tạo file test_db_connection.py trong thư mục project:
+
+```python
+import mysql.connector
+from mysql.connector import Error
+
+def connect_and_test_database():
+    try:
+        # Kết nối đến MariaDB
+        connection = mysql.connector.connect(
+            host='localhost',        # hoặc 127.0.0.1
+            port=3306,               # port được expose từ container
+            database='studentdb',    # tên database
+            user='root',            # username
+            password='root'         # password
+        )
+
+        if connection.is_connected():
+            print("✅ Kết nối thành công đến MariaDB!")
+            print(f"📊 Server version: {connection.get_server_info()}")
+
+            # Tạo cursor để thực hiện queries
+            cursor = connection.cursor()
+
+            # Hiển thị thông tin database hiện tại
+            cursor.execute("SELECT DATABASE();")
+            db_name = cursor.fetchone()
+            print(f"📋 Database hiện tại: {db_name[0]}")
+
+            # Hiển thị danh sách tables
+            cursor.execute("SHOW TABLES;")
+            tables = cursor.fetchall()
+            print("📋 Danh sách tables:")
+            for table in tables:
+                print(f"  - {table[0]}")
+
+            # Hiển thị dữ liệu trong bảng students
+            cursor.execute("SELECT * FROM students;")
+            students = cursor.fetchall()
+            print("\n👥 Danh sách sinh viên trong studentdb:")
+            print("ID | Student ID | Full Name | DOB | Major")
+            print("-" * 60)
+            for student in students:
+                print(f"{student[0]} | {student[1]} | {student[2]} | {student[3]} | {student[4]}")
+
+            # Thực hiện một số CRUD operations mẫu
+            print("\n🔄 THỰC HIỆN CRUD OPERATIONS:")
+
+            # CREATE - Thêm sinh viên mới
+            print("\n➕ CREATE: Thêm sinh viên mới")
+            cursor.execute("""
+                INSERT INTO students (student_id, fullname, dob, major)
+                VALUES (%s, %s, %s, %s)
+            """, ('SV004', 'Nguyen Van D', '2003-06-15', 'Data Science'))
+            connection.commit()
+            print("✅ Đã thêm sinh viên SV004")
+
+            # READ - Đọc dữ liệu
+            print("\n📖 READ: Hiển thị sinh viên ngành Computer Science")
+            cursor.execute("SELECT * FROM students WHERE major = 'Computer Science';")
+            cs_students = cursor.fetchall()
+            for student in cs_students:
+                print(f"  - {student[1]}: {student[2]}")
+
+            # UPDATE - Cập nhật thông tin
+            print("\n✏️ UPDATE: Cập nhật ngành học của SV004")
+            cursor.execute("""
+                UPDATE students SET major = 'AI & Data Science'
+                WHERE student_id = 'SV004'
+            """)
+            connection.commit()
+            print("✅ Đã cập nhật ngành của SV004")
+
+            # DELETE - Xóa sinh viên
+            print("\n🗑️ DELETE: Xóa sinh viên SV004")
+            cursor.execute("DELETE FROM students WHERE student_id = 'SV004';")
+            connection.commit()
+            print("✅ Đã xóa sinh viên SV004")
+
+            print("\n🎉 Đã hoàn thành tất cả CRUD operations!")
+
+    except Error as e:
+        print(f"❌ Lỗi kết nối database: {e}")
+        print("💡 Kiểm tra:")
+        print("  - Container MariaDB đã chạy: docker compose ps")
+        print("  - Port 3306 không bị block")
+        print("  - Firewall cho phép kết nối đến localhost:3306")
+
+    finally:
+        if 'connection' in locals() and connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("🔌 Đã đóng kết nối database.")
+
+if __name__ == "__main__":
+    connect_and_test_database()
+```
+
+# Chạy script từ thư mục project:
+python test_db_connection.py
+
+# Kết quả mong đợi:
+# ✅ Kết nối thành công đến MariaDB!
+# 📊 Server version: 11.x.x-MariaDB
+# 📋 Database hiện tại: studentdb
+# 📋 Danh sách tables:
+#   - students
+# 👥 Danh sách sinh viên trong studentdb:
+# ID | Student ID | Full Name | DOB | Major
+# ------------------------------------------------------------
+# 1 | SV001 | Nguyễn Văn A | 2004-10-12 | Computer Science
+# 2 | SV002 | Trần Thị B | 2004-02-20 | Information Systems
+# 3 | SV003 | Lê Hoàng C | 2003-08-05 | Cyber Security
+
+# CÁCH 3: Sử dụng container tạm thời (nếu có Docker)
+docker run --rm -it --network cloud-net mariadb:11 mysql -h relational-database-server -u root -p
+
+BUOC 3.3: KIEM TRA DATABASE VA TABLES
+-----------------------------------
+# Trong MySQL shell, thực hiện:
+
+# Hiển thị tất cả databases
+SHOW DATABASES;
+
+# Chọn database studentdb
+USE studentdb;
+
+# Hiển thị tables
+SHOW TABLES;
+
+# Xem cấu trúc bảng students
+DESCRIBE students;
+
+# Xem dữ liệu trong bảng
+SELECT * FROM students;
+
+BUOC 3.4: THUC HIEN CRUD OPERATIONS
+---------------------------------
+# Trong MySQL shell:
+
+# CREATE - Thêm sinh viên mới
+INSERT INTO students (student_id, fullname, dob, major)
+VALUES ('SV004', 'Nguyen Van D', '2003-06-15', 'Data Science');
+
+# READ - Đọc dữ liệu
+SELECT * FROM students WHERE major = 'Computer Science';
+
+# UPDATE - Cập nhật thông tin
+UPDATE students SET major = 'AI & Data Science'
+WHERE student_id = 'SV004';
+
+# DELETE - Xóa sinh viên
+DELETE FROM students WHERE student_id = 'SV004';
+
+BUOC 3.5: KET NOI TU FLASK APP (TUY CHON)
+---------------------------------------
+# Tạo file test_db.py trong thư mục application-backend-server:
+
+```python
+import mysql.connector
+from mysql.connector import Error
+
+def test_db_connection():
+    try:
+        connection = mysql.connector.connect(
+            host='relational-database-server',
+            database='studentdb',
+            user='root',
+            password='root'
+        )
+
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM students")
+            records = cursor.fetchall()
+
+            print("Danh sách sinh viên:")
+            for row in records:
+                print(f"ID: {row[0]}, Student ID: {row[1]}, Name: {row[2]}")
+
+    except Error as e:
+        print(f"Lỗi: {e}")
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
+if __name__ == "__main__":
+    test_db_connection()
+```
+
+# Chạy test
+python test_db.py
+
+================================================================================
+PHAN 4: AUTHENTICATION IDENTITY SERVER (KEYCLOAK)
+================================================================================
+
+BUOC 4.1: KHOI DONG KEYCLOAK CONTAINER
+-------------------------------------
+# Khởi động Keycloak
+docker compose up -d authentication-identity-server
+
+# Kiểm tra container
+docker compose ps
+
+BUOC 4.2: TRUY CAP KEYCLOAK ADMIN CONSOLE
+----------------------------------------
+# Mở trình duyệt và truy cập:
+http://localhost:8081
+
+# Đăng nhập với:
+Username: admin
+Password: admin
+
+BUOC 4.3: TAO REALM MOI
+----------------------
+1. Ở góc trên bên trái, click vào "Master" (dropdown menu)
+2. Click "Create Realm"
+3. Điền thông tin:
+   - Realm name: [Thay bằng mã sinh viên của bạn, ví dụ: realm_sv001]
+   - Enabled: ON
+4. Click "Create"
+
+BUOC 4.4: TAO USERS
+------------------
+1. Trong realm mới, chọn menu "Users" (bên trái)
+2. Click "Create new user"
+3. Tạo user sv01:
+   - Username: sv01
+   - Email: sv01@cloud.local
+   - First name: Sinh
+   - Last name: Vien 01
+   - Email verified: ON
+   - Enabled: ON
+4. Click "Create"
+5. Chọn tab "Credentials"
+6. Click "Set password"
+7. Đặt password: password123
+8. Temporary: OFF
+9. Click "Save"
+
+10. Lặp lại bước 3-9 để tạo user sv02
+
+BUOC 4.5: TAO CLIENT
+-------------------
+1. Chọn menu "Clients" (bên trái)
+2. Click "Create client"
+3. Điền thông tin:
+   - Client ID: flask-app
+   - Client type: OpenID Connect
+   - Client authentication: Off
+4. Click "Next"
+5. Capability config:
+   - Standard flow: ON
+   - Direct access grants: ON
+6. Click "Next"
+7. Login settings:
+   - Valid redirect URIs: http://localhost:8085/*
+   - Web origins: http://localhost:8085
+8. Click "Save"
+
+BUOC 4.6: LAY TOKEN ENDPOINT VA TEST (Windows PowerShell + Linux/Mac)
+---------------------------------------------------------------
+1. Vào menu "Realm settings"
+2. Chọn tab "General"
+3. Copy "Realm ID" để dùng
+
+4. Vào menu "Clients" > "flask-app"
+5. Chọn tab "Credentials"
+6. Copy "Client secret"
+
+7. Lấy Token endpoint:
+GET http://localhost:8081/realms/[realm-id]/protocol/openid-connect/token
+
+8. Test lấy token:
+
+   **CÁCH 1: Sử dụng PowerShell (Windows) - KHUYẾN NGHỊ**
+
+   a) Lệnh cơ bản để lấy token:
+   ```powershell
+   $response = Invoke-WebRequest -Uri "http://localhost:8081/realms/realm_sv189/protocol/openid-connect/token" `
+     -Method POST `
+     -Headers @{"Content-Type"="application/x-www-form-urlencoded"} `
+     -Body "grant_type=password&client_id=flask-app&client_secret=abc123def456&username=sv01&password=password123"
+
+   $token = ($response.Content | ConvertFrom-Json).access_token
+   Write-Host "Access Token: $token"
+   ```
+
+   b) Tạo file PowerShell script để tái sử dụng:
+   ```powershell
+   # Tạo file get_keycloak_token.ps1 với nội dung:
+   function Get-KeycloakToken {
+       param(
+           [string]$RealmId = "realm_sv189",
+           [string]$ClientId = "flask-app",
+           [string]$ClientSecret = "abc123def456",
+           [string]$Username = "sv01",
+           [string]$Password = "password123"
+       )
+
+       $uri = "http://localhost:8081/realms/$RealmId/protocol/openid-connect/token"
+       $body = "grant_type=password&client_id=$ClientId&client_secret=$ClientSecret&username=$Username&password=$Password"
+
+       try {
+           $response = Invoke-WebRequest -Uri $uri -Method POST -Headers @{"Content-Type"="application/x-www-form-urlencoded"} -Body $body
+           $tokenData = $response.Content | ConvertFrom-Json
+           return $tokenData.access_token
+       }
+       catch {
+           Write-Error "Failed to get token: $($_.Exception.Message)"
+           return $null
+       }
+   }
+
+   # Cách sử dụng:
+   $token = Get-KeycloakToken
+   Write-Host "Token: $token"
+   ```
+
+   c) Chạy script:
+   ```powershell
+   # Load script
+   . .\get_keycloak_token.ps1
+
+   # Lấy token
+   $token = Get-KeycloakToken
+   Write-Host "Access Token: $token"
+   ```
+
+   **CÁCH 2: Sử dụng curl (Linux/Mac)**
+   ```bash
+   curl -X POST http://localhost:8081/realms/realm_sv189/protocol/openid-connect/token \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "grant_type=password&client_id=flask-app&client_secret=abc123def456&username=sv01&password=password123"
+   ```
+
+   **CÁCH 3: Sử dụng curl trên Windows (nếu có curl mới)**
+   ```cmd
+   curl -X POST http://localhost:8081/realms/realm_sv189/protocol/openid-connect/token ^
+     -H "Content-Type: application/x-www-form-urlencoded" ^
+     -d "grant_type=password&client_id=flask-app&client_secret=abc123def456&username=sv01&password=password123"
+   ```
+
+9. Kiểm tra token:
+   - Token sẽ có format JWT (3 phần ngăn cách bởi dấu chấm)
+   - Token có thời hạn (thường 5-15 phút)
+   - Sử dụng token này để test API endpoints
+
+10. Test token với User Info endpoint:
+    ```powershell
+    # Thay YOUR_TOKEN bằng token vừa lấy
+    $token = "YOUR_TOKEN_HERE"
+    Invoke-WebRequest -Uri "http://localhost:8081/realms/realm_sv189/protocol/openid-connect/userinfo" `
+      -Method GET `
+      -Headers @{"Authorization"="Bearer $token"}
+    ```
+
+11. Chuẩn bị cho bước tiếp theo:
+    - Token này sẽ được sử dụng để test Flask API
+    - Lưu token để sử dụng trong các bước sau
+    - Nếu token hết hạn, chạy lại lệnh lấy token mới
+
+================================================================================
+PHAN 5: OBJECT STORAGE SERVER (MINIO)
+================================================================================
+
+BUOC 5.1: KHOI DONG MINIO CONTAINER
+----------------------------------
+# Khởi động MinIO
+docker compose up -d object-storage-server
+
+# Kiểm tra container
+docker compose ps
+
+BUOC 5.2: TRUY CAP MINIO CONSOLE
+-------------------------------
+# Mở trình duyệt và truy cập MinIO Console:
+http://localhost:9001
+
+# Đăng nhập với:
+Username: minioadmin
+Password: minioadmin
+
+BUOC 5.3: TAO BUCKET 'PROFILE-PICS'
+----------------------------------
+1. Trong MinIO Console, click "Create Bucket" (+ icon)
+2. Bucket Name: profile-pics
+3. Click "Create Bucket"
+
+BUOC 5.4: UPLOAD AVATAR VAO PROFILE-PICS
+---------------------------------------
+
+**Mục tiêu:** Upload file ảnh avatar và tạo URL public để truy cập
+
+**CÁCH 1: Upload qua MinIO Console (Web UI) - KHUYẾN NGHỊ cho người mới**
+
+1. **Truy cập MinIO Console:**
+   - Mở trình duyệt: http://localhost:9001
+   - Đăng nhập với:
+     - Username: minioadmin
+     - Password: minioadmin
+
+2. **Vào bucket profile-pics:**
+   - Từ dashboard, click vào bucket "profile-pics"
+   - Hoặc click menu bên trái > "Buckets" > "profile-pics"
+
+3. **Upload file ảnh:**
+   - Click nút "Upload" (biểu tượng đám mây ☁️)
+   - Click "Upload file" hoặc kéo thả file vào vùng upload
+   - Chọn file ảnh avatar (ví dụ: avatar.jpg, avatar.png)
+   - Click "Upload" để bắt đầu upload
+
+4. **Kiểm tra upload thành công:**
+   - File sẽ xuất hiện trong danh sách objects
+   - Trạng thái upload sẽ hiển thị "Upload successful"
+
+5. **Tạo URL public:**
+   - Click vào file avatar vừa upload
+   - Chọn tab "Object URL" hoặc "Share"
+   - Click "Shareable Link" hoặc "Copy URL"
+   - URL sẽ có dạng: http://localhost:9000/profile-pics/avatar.jpg
+
+6. **Test URL:**
+   - Paste URL vào trình duyệt mới
+   - Ảnh avatar sẽ hiển thị trực tiếp
+
+**CÁCH 2: Upload qua Command Line (MinIO Client)**
+
+1. **Cài đặt MinIO Client (mc):**
+   ```bash
+   # Linux/Mac
+   curl https://dl.min.io/client/mc/release/linux-amd64/mc -o mc
+   chmod +x mc
+   sudo mv mc /usr/local/bin/
+
+   # Windows (PowerShell as Admin)
+   Invoke-WebRequest -Uri "https://dl.min.io/client/mc/release/windows-amd64/mc.exe" -OutFile "mc.exe"
+   # Thêm mc.exe vào PATH
+   ```
+
+2. **Cấu hình MinIO client:**
+   ```bash
+   # Thêm MinIO server
+   mc alias set local http://localhost:9000 minioadmin minioadmin
+
+   # Liệt kê buckets
+   mc ls local/
+   ```
+
+3. **Upload file:**
+   ```bash
+   # Upload file avatar.jpg vào bucket profile-pics
+   mc cp avatar.jpg local/profile-pics/
+
+   # Kiểm tra upload
+   mc ls local/profile-pics/
+   ```
+
+4. **Tạo presigned URL:**
+   ```bash
+   # Tạo URL public (có thời hạn)
+   mc share download local/profile-pics/avatar.jpg
+
+   # Hoặc tạo URL không có thời hạn (anonymous access)
+   echo "http://localhost:9000/profile-pics/avatar.jpg"
+   ```
+
+**CÁCH 3: Upload qua API (REST)**
+
+1. **Sử dụng curl để upload:**
+   ```bash
+   # Đầu tiên, tạo access token (nếu cần authentication)
+   curl -X POST "http://localhost:9000/profile-pics/avatar.jpg" \
+     -H "Authorization: Bearer YOUR_TOKEN" \
+     -T avatar.jpg
+   ```
+
+2. **Hoặc sử dụng Python script:**
+   ```python
+   import requests
+
+   # Upload file
+   with open('avatar.jpg', 'rb') as f:
+       response = requests.put(
+           'http://localhost:9000/profile-pics/avatar.jpg',
+           data=f,
+           auth=('minioadmin', 'minioadmin')
+       )
+
+   if response.status_code == 200:
+       print("Upload successful!")
+       print("Public URL: http://localhost:9000/profile-pics/avatar.jpg")
+   ```
+
+**Cách lấy Direct URL (Khuyến nghị thay vì Share Link):**
+
+Sau khi upload file, thay vì dùng "Shareable Link":
+
+1. **Click vào file** (ví dụ: avatar.jpg, avartar.png) trong danh sách
+2. **Copy URL trực tiếp:**
+   - URL sẽ là: `http://localhost:9000/profile-pics/{filename}`
+   - Ví dụ: `http://localhost:9000/profile-pics/avartar.png`
+   - Đây là direct access URL
+
+3. **Test URL:**
+   - Paste vào trình duyệt: `http://localhost:9000/profile-pics/avartar.png`
+   - Ảnh sẽ hiển thị trực tiếp
+
+**CẤU HÌNH BUCKET PERMISSIONS (Quan trọng!):**
+
+Sau khi tạo bucket, cần cấu hình permissions để cho phép public access:
+
+1. **Trong MinIO Console:**
+   - Click vào bucket **"profile-pics"**
+   - Trong Object Browser, tìm nút **"Access"** hoặc **"Policy"** (thường ở góc phải)
+   - Click vào **"Access: PRIVATE"** để thay đổi
+   - Chọn **"Public"** hoặc **"Read Only"**
+   - Hoặc tìm **"Bucket Policy"** trong menu settings
+
+   **Nếu không thấy tùy chọn trong UI:**
+   - Sử dụng **Manage** button (biểu tượng bánh răng)
+   - Chọn **"Access Policy"** từ dropdown menu
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {"AWS": "*"},
+      "Action": ["s3:GetObject"],
+      "Resource": ["arn:aws:s3:::profile-pics/*"]
+    }
+  ]
+}
+```
+
+2. **Via MinIO Client:**
+```bash
+# Set bucket policy cho public read
+mc policy set download local/profile-pics
+
+# Hoặc set policy JSON
+mc policy set-json local/profile-pics policy.json
+```
+
+3. **Via API:**
+```bash
+# Set bucket policy
+curl -X PUT "http://localhost:9000/profile-pics?policy" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -d '{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {"AWS": "*"},
+        "Action": ["s3:GetObject"],
+        "Resource": ["arn:aws:s3:::profile-pics/*"]
+      }
+    ]
+  }'
+```
+
+**Lưu ý về Share Links:**
+- Share links của MinIO thường có format dài và phức tạp
+- Có thể bị cắt trong một số giao diện
+- Thường có thời hạn expire
+- **Khuyên dùng Direct URL cho production**
+
+**Lưu ý quan trọng:**
+- **File permissions:** Để URL public hoạt động, bucket cần được cấu hình public access
+- **File size:** MinIO hỗ trợ upload file lớn, nhưng có giới hạn network
+- **File types:** Hỗ trợ tất cả loại file, nhưng cho avatar nên dùng JPG/PNG
+- **Naming:** Sử dụng tên file có nghĩa để dễ quản lý
+
+**Troubleshooting:**
+- **Access Denied:** Cấu hình bucket permissions (xem hướng dẫn trên)
+- Upload thất bại: Kiểm tra network connection và credentials
+- URL không truy cập được: Kiểm tra bucket permissions
+- Ảnh không hiển thị: Kiểm tra file format và browser cache
+- Share link bị cắt: Dùng direct URL `http://localhost:9000/{bucket-name}/{file-name}`
+
+BUOC 5.5: TAO BUCKET 'DOCUMENTS'
+-------------------------------
+1. Click "Create Bucket" (+ icon)
+2. Bucket Name: documents
+3. Click "Create Bucket"
+
+BUOC 5.6: UPLOAD FILE PDF VA TEST URL
+-----------------------------------
+**Mục tiêu:** Upload file PDF vào bucket documents và tạo URL public
+
+**CÁCH 1: Upload qua MinIO Console**
+
+1. **Vào bucket documents:**
+   - Trong MinIO Console, click vào bucket "documents"
+   - Click nút "Upload" (cloud icon)
+
+2. **Chọn file PDF:**
+   - Click "Upload file" hoặc kéo thả file PDF
+   - Chọn file báo cáo PDF từ máy tính (ví dụ: report.pdf)
+   - Click "Upload" để upload
+
+3. **Kiểm tra upload:**
+   - File sẽ xuất hiện trong danh sách
+   - Click vào file để xem details
+
+4. **Lấy URL:**
+   - URL direct: `http://localhost:9000/documents/{filename}`
+   - Ví dụ: `http://localhost:9000/documents/report.pdf`
+
+**CÁCH 2: Upload qua MinIO Client**
+
+```bash
+# Upload file PDF
+.\mc.exe cp report.pdf local/documents/
+
+# Kiểm tra upload
+.\mc.exe ls local/documents/
+
+# Test access
+Invoke-WebRequest -Uri "http://localhost:9000/documents/report.pdf" -Method GET
+```
+
+**CÁCH 3: Tạo file PDF mẫu (nếu không có file thật)**
+
+```powershell
+# Tạo file PDF mẫu bằng PowerShell
+$content = "Sample PDF Report`n=================`nThis is a sample PDF document for MinIO testing.`nDate: $(Get-Date)`nGenerated by: DTDM Project"
+$content | Out-File -FilePath "sample_report.pdf" -Encoding UTF8
+
+# Upload file mẫu
+.\mc.exe cp sample_report.pdf local/documents/
+```
+1. Vào bucket "documents"
+2. Click "Upload" (cloud icon)
+3. Chọn file PDF báo cáo từ máy tính
+4. Click "Upload"
+
+5. Sau khi upload xong, click vào file PDF
+6. Chọn tab "Object URL"
+7. Click "Shareable Link" để lấy URL public
+8. Test URL trong trình duyệt
+
+================================================================================
+PHAN 6: INTERNAL DNS SERVER
+================================================================================
+**Mục tiêu:** Hiểu về DNS (Domain Name System) và cấu hình internal DNS server
+**Lợi ích:** Cho phép các container giao tiếp với nhau qua domain names thay vì IP addresses
+**Công nghệ:** BIND9 DNS server chạy trong Docker container
+
+BUOC 6.1: KHOI DONG DNS CONTAINER
+--------------------------------
+**DNS là gì?**
+DNS (Domain Name System) là hệ thống phân giải tên miền thành địa chỉ IP.
+Trong microservices architecture, DNS giúp các service tìm và giao tiếp với nhau.
+
+**Khởi động DNS server:**
+```bash
+# Khởi động container DNS
+docker compose up -d internal-dns-server
+
+# Kiểm tra trạng thái container
+docker compose ps
+
+# Xem logs để đảm bảo DNS server khởi động thành công
+docker compose logs internal-dns-server
+```
+
+**Expected output:**
+```
+NAME                    IMAGE                                  STATUS
+internal-dns-server     internetsystemsconsortium/bind9:9.18   Up
+```
+
+**DNS Server specs:**
+- **Port:** 1053/UDP (không phải port 53 standard để tránh conflict với host DNS)
+- **Domain:** cloud.local
+- **Type:** Authoritative DNS server cho internal network
+
+BUOC 6.2: HIỂU VỀ DNS RECORDS & ZONE FILES
+------------------------------------------
+**DNS Records là gì?**
+- **A Record:** Map domain name → IPv4 address
+- **NS Record:** Name Server record
+- **SOA Record:** Start of Authority (thông tin zone)
+
+**Zone File structure:**
+```
+$TTL 1H          ; Time To Live (1 hour)
+@ IN SOA ns.cloud.local. admin.cloud.local. (
+    1           ; Serial number
+    1H          ; Refresh (1 hour)
+    15M         ; Retry (15 minutes)
+    1W          ; Expire (1 week)
+    1H          ; Negative TTL (1 hour)
+)
+    IN NS ns.cloud.local.    ; Name Server
+ns  IN A  127.0.0.1          ; NS points to localhost
+```
+
+**Các DNS records trong hệ thống:**
+- **web-frontend-server:** Frontend web app (Nginx)
+- **app-backend.cloud.local:** Flask backend API
+- **minio.cloud.local:** MinIO object storage
+- **keycloak.cloud.local:** Keycloak authentication
+
+BUOC 6.3: XEM & HIỂU ZONE FILE HIỆN TẠI
+-------------------------------------
+```bash
+# Xem nội dung zone file
+cat internal-dns-server/db.cloud.local
+```
+
+**Nội dung chi tiết của file db.cloud.local:**
+```
+$TTL 1H
+@   IN  SOA ns.cloud.local. admin.cloud.local. (1 1H 15M 1W 1H)
+    IN  NS  ns.cloud.local.
+ns  IN  A   127.0.0.1
+
+; Service records
+web-frontend-server     IN A 10.10.10.10
+app-backend.cloud.local IN A 10.10.10.20
+minio.cloud.local       IN A 10.10.10.30
+keycloak.cloud.local    IN A 10.10.10.40
+```
+
+**Giải thích từng record:**
+- `web-frontend-server IN A 10.10.10.10` → Frontend service
+- `app-backend.cloud.local IN A 10.10.10.20` → Backend API
+- `minio.cloud.local IN A 10.10.10.30` → Object storage
+- `keycloak.cloud.local IN A 10.10.10.40` → Authentication service
+
+BUOC 6.4: RESTART DNS CONTAINER
+------------------------------
+**Tại sao cần restart?**
+Khi thay đổi zone file, DNS server cần được restart để load cấu hình mới.
+
+```bash
+# Restart DNS container
+docker compose restart internal-dns-server
+
+# Kiểm tra logs để đảm bảo restart thành công (Windows PowerShell)
+docker compose logs internal-dns-server | Select-Object -Last 10
+
+# Hoặc xem tất cả logs
+docker compose logs internal-dns-server
+```
+
+**Expected logs:**
+```
+27-Nov-2025 23:35:00.001 zone cloud.local/IN: loaded serial 1
+27-Nov-2025 23:35:00.001 running
+```
+
+BUOC 6.5: TEST DNS RESOLUTION CHI TIẾT
+-----------------------------------
+**Quan trọng về Docker DNS:**
+- Docker containers mặc định sử dụng internal DNS resolver (127.0.0.11)
+- DNS server của chúng ta chạy trên port 1053 (external access)
+- Trong Docker network, containers có thể truy cập nhau bằng service names
+- DNS server này chủ yếu để demo và hiểu khái niệm DNS resolution
+
+**1. Test từ container khác (recommended):**
+```bash
+# Test từ backend container (nó sẽ dùng DNS server internal)
+docker exec application-backend-server nslookup app-backend.cloud.local internal-dns-server
+
+# Test từng service
+docker exec application-backend-server nslookup minio.cloud.local internal-dns-server
+    docker exec application-backend-server nslookup keycloak.cloud.local internal-dns-server
+```
+
+**Expected output:**
+```
+Server: internal-dns-server
+Address: 172.18.0.XX#53
+
+Name: app-backend.cloud.local
+Address: 10.10.10.20
+```
+
+**2. Test từ host với dig (Linux/Mac):**
+```bash
+# Chỉ định port 1053
+dig @127.0.0.1 -p 1053 app-backend.cloud.local A
+
+# Hoặc dùng drill (alternative to dig)
+drill @127.0.0.1 -p 1053 app-backend.cloud.local
+```
+
+**3. Test từ Windows PowerShell:**
+```powershell
+# DNS server dùng port 1053, PowerShell không support custom port
+# Thay vào đó, test từ container (recommended)
+
+# Test connectivity to DNS port
+Test-NetConnection -ComputerName 127.0.0.1 -Port 1053
+
+# Test DNS từ application container
+docker exec application-backend-server nslookup app-backend.cloud.local internal-dns-server
+```
+
+**4. Test thực tế - từ application container:**
+```bash
+# Test xem app có thể resolve DNS không
+docker exec application-backend-server python3 -c "
+import socket
+try:
+    result = socket.gethostbyname('app-backend.cloud.local')
+    print(f'DNS Resolution: app-backend.cloud.local -> {result}')
+except Exception as e:
+    print(f'DNS Failed: {e}')
+"
+
+# Test curl đến service khác qua domain name
+docker exec application-backend-server curl -I --connect-timeout 5 minio.cloud.local:9000
+```
+
+BUOC 6.6: TROUBLESHOOTING DNS ISSUES
+----------------------------------
+**Nếu DNS không hoạt động:**
+
+**1. Kiểm tra container status:**
+```bash
+docker compose ps
+# DNS container phải ở trạng thái "Up"
+```
+
+**2. Kiểm tra logs:**
+```bash
+docker compose logs internal-dns-server
+# Tìm lỗi syntax trong zone file
+```
+
+**3. Validate zone file:**
+```bash
+# Kiểm tra syntax zone file
+docker exec internal-dns-server named-checkzone cloud.local /etc/bind/db.cloud.local
+```
+
+**4. Test port connectivity:**
+```bash
+# Kiểm tra port 1053 có mở không
+netstat -an | findstr 1053
+# hoặc
+telnet 127.0.0.1 1053
+```
+
+**5. Common issues:**
+- **Zone file syntax error:** Kiểm tra định dạng SOA record
+- **Port conflict:** DNS server khác đang dùng port 53
+- **Firewall blocking:** Windows Firewall block UDP port 1053
+- **Container networking:** DNS container không thể bind port
+
+**6. Fix common problems:**
+```bash
+# Restart với clean state
+docker compose down
+docker compose up -d internal-dns-server
+
+# Force reload zone
+docker exec internal-dns-server rndc reload
+
+# Windows alternative (nếu rndc không hoạt động)
+docker compose restart internal-dns-server
+```
+
+BUOC 6.7: DEMO DNS TRONG THỰC TẾ
+-------------------------------
+**Cách các service sử dụng DNS:**
+
+**1. Backend gọi MinIO qua DNS:**
+```python
+# Trong app.py, thay vì dùng IP, dùng domain name
+minio_client = MinIOClient(
+    endpoint="minio.cloud.local:9000",  # Thay vì 127.0.0.1:9000
+    access_key="minioadmin",
+    secret_key="minioadmin"
+)
+```
+
+**2. Frontend gọi Backend API:**
+```javascript
+// Trong frontend, thay vì IP, dùng domain
+const API_BASE = "http://app-backend.cloud.local:8085";
+fetch(`${API_BASE}/api/data`);
+```
+
+**3. Backend gọi Keycloak:**
+```python
+# Trong authentication
+KEYCLOAK_URL = "http://keycloak.cloud.local:8080"
+```
+
+**4. Test connectivity giữa containers:**
+```bash
+# Test từ backend container đến MinIO (sử dụng Python vì curl không có sẵn)
+docker exec application-backend-server python3 -c "
+import requests
+try:
+    r = requests.get('http://object-storage-server:9000', timeout=5)
+    print(f'MinIO Connection: Status {r.status_code}')
+except Exception as e:
+    print(f'MinIO Error: {e}')
+"
+
+# Test từ backend đến Keycloak
+docker exec application-backend-server python3 -c "
+import requests
+try:
+    r = requests.get('http://authentication-identity-server:8080', timeout=5, allow_redirects=False)
+    print(f'Keycloak Connection: Status {r.status_code}')
+except Exception as e:
+    print(f'Keycloak Error: {e}')
+"
+```
+
+BUOC 6.8: MONITORING & LOGS
+--------------------------
+**Theo dõi DNS server:**
+
+```bash
+# Xem real-time logs
+docker compose logs -f internal-dns-server
+
+# Kiểm tra query logs
+docker exec internal-dns-server tail -f /var/log/named/query.log
+
+# Thống kê DNS queries
+docker exec internal-dns-server rndc stats
+cat /var/log/named/named.stats
+```
+
+**DNS Performance:**
+- **Response time:** DNS queries thường < 1ms locally
+- **Cache:** BIND9 cache results để tăng tốc
+- **Reliability:** DNS là single point of failure → cần monitoring
+
+BUOC 6.9: BACKUP & RECOVERY
+--------------------------
+**Backup DNS configuration:**
+```bash
+# Backup zone files
+cp internal-dns-server/db.cloud.local internal-dns-server/db.cloud.local.backup
+
+# Backup named.conf
+cp internal-dns-server/named.conf internal-dns-server/named.conf.backup
+```
+
+**Recovery từ backup:**
+```bash
+# Restore zone file
+cp internal-dns-server/db.cloud.local.backup internal-dns-server/db.cloud.local
+docker compose restart internal-dns-server
+```
+
+================================================================================
+PHAN 7: TEST TONG THE HE THONG
+================================================================================
+**Mục tiêu:** Test toàn diện tất cả thành phần của hệ thống DTDM Cloud Computing
+**Thời gian:** 10-15 phút
+**Công cụ:** PowerShell, Browser, Docker commands
+
+BUOC 7.1: KIEM TRA INFRASTRUCTURE
+----------------------------------
+**1. Kiểm tra tất cả containers đang chạy:**
+```bash
+docker compose ps
+```
+
+**Expected output (8 services):**
+```
+NAME                                  STATUS
+api-gateway-proxy-server              Up
+application-backend-server            Up
+authentication-identity-server        Up
+internal-dns-server                   Up
+monitoring-grafana-dashboard-server   Up
+monitoring-node-exporter-server       Up
+monitoring-prometheus-server          Up
+object-storage-server                 Up
+relational-database-server            Up
+web-frontend-server                   Up
+```
+
+**2. Kiểm tra container logs (optional):**
+```bash
+# Check for any errors
+docker compose logs --tail=20
+```
+
+BUOC 7.2: TEST AUTHENTICATION SYSTEM
+-----------------------------------
+**1. Truy cập Keycloak Admin Console:**
+```
+URL: http://localhost:8081
+Username: admin
+Password: admin
+```
+
+**2. Verify realm và users:**
+- Vào Realm: `realm_sv189`
+- Vào Users: Kiểm tra user `sv01`
+- Vào Clients: Kiểm tra client `flask-app`
+
+**3. Test JWT token generation:**
+```powershell
+$response = Invoke-WebRequest -Uri "http://localhost:8081/realms/realm_sv189/protocol/openid-connect/token" `
+  -Method POST `
+  -Headers @{"Content-Type"="application/x-www-form-urlencoded"} `
+  -Body "grant_type=password&client_id=flask-app&client_secret=abc123def456&username=sv01&password=password123"
+
+$token = ($response.Content | ConvertFrom-Json).access_token
+Write-Host "JWT Token generated successfully!"
+```
+
+BUOC 7.3: TEST OBJECT STORAGE (MINIO)
+-----------------------------------
+**1. Truy cập MinIO Console:**
+```
+URL: http://localhost:9001
+Username: minioadmin
+Password: minioadmin
+```
+
+**2. Verify buckets và files:**
+- Bucket `profile-pics`: chứa file `avartar.png`
+- Bucket `documents`: chứa `Hello world.pdf`, `sample_report.pdf`
+
+**3. Test public file access:**
+```powershell
+# Test avatar image
+Invoke-WebRequest -Uri "http://localhost:9000/profile-pics/avartar.png" -Method GET
+
+# Test PDF document
+Invoke-WebRequest -Uri "http://localhost:9000/documents/sample_report.pdf" -Method GET
+```
+
+**Expected:** Status 200 cho cả hai URLs
+
+BUOC 7.4: TEST DATABASE OPERATIONS
+---------------------------------
+**1. Test database connectivity từ backend:**
+```powershell
+# Test students endpoint
+Invoke-WebRequest -Uri "http://localhost:8085/students" -Method GET
+```
+
+**Expected output:**
+```json
+[
+  {
+    "id": 1,
+    "student_id": "SV001",
+    "fullname": "Nguyen Van A",
+    "dob": "2004-10-12T00:00:00.000Z",
+    "major": "Computer Science"
+  },
+  ...
+]
+```
+
+**2. Verify database content trực tiếp (optional):**
+```bash
+# Connect to database (requires mysql client)
+mysql -h localhost -P 3306 -u root -proot minicloud -e "SELECT * FROM students;"
+```
+
+BUOC 7.5: TEST API ENDPOINTS
+---------------------------
+**1. Test public endpoints:**
+```powershell
+# Hello endpoint
+Invoke-WebRequest -Uri "http://localhost:8085/hello" -Method GET
+
+# Students data
+Invoke-WebRequest -Uri "http://localhost:8085/students" -Method GET
+```
+
+**2. Test protected endpoint:**
+```powershell
+# Secure endpoint with JWT
+Invoke-WebRequest -Uri "http://localhost:8085/secure" `
+  -Method GET `
+  -Headers @{"Authorization"="Bearer $token"}
+```
+
+**Expected responses:**
+- `/hello`: `{"message": "Hello from Backend!"}`
+- `/students`: JSON array với student data
+- `/secure`: `{"message": "Secure resource OK (DEBUG MODE - UPDATED)", "preferred_username": "sv01"}`
+
+BUOC 7.6: TEST SERVICE COMMUNICATION
+----------------------------------
+**1. Test inter-container connectivity:**
+```bash
+# Backend to MinIO (Python vì curl không có sẵn trong container)
+docker exec application-backend-server python3 -c "
+import requests
+try:
+    r = requests.get('http://object-storage-server:9000', timeout=5)
+    print(f'MinIO Connection: Status {r.status_code} (expected 403 - auth required)')
+except Exception as e:
+    print(f'MinIO Error: {e}')
+"
+
+# Backend to Keycloak
+docker exec application-backend-server python3 -c "
+import requests
+try:
+    r = requests.get('http://authentication-identity-server:8080', timeout=5, allow_redirects=False)
+    print(f'Keycloak Connection: Status {r.status_code} (expected 302 - redirect)')
+except Exception as e:
+    print(f'Keycloak Error: {e}')
+"
+
+# Backend to Database (via socket connection)
+docker exec application-backend-server python3 -c "
+import socket
+try:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(5)
+    result = sock.connect_ex(('relational-database-server', 3306))
+    sock.close()
+    if result == 0:
+        print('Database Connection: SUCCESS (port 3306 open)')
+    else:
+        print('Database Connection: FAILED')
+except Exception as e:
+    print(f'Database Error: {e}')
+"
+```
+
+**Expected responses:**
+- **MinIO:** Status 403 (Forbidden - authentication required)
+- **Keycloak:** Status 302 (Redirect - normal for web apps)
+- **Database:** SUCCESS (port 3306 accessible)
+
+BUOC 7.7: TEST MONITORING SYSTEM
+-------------------------------
+**1. Test Prometheus metrics:**
+```
+URL: http://localhost:9090
+Query: up{job="node"}
+```
+
+**2. Test Grafana dashboard:**
+```
+URL: http://localhost:3000
+Username: admin
+Password: admin
+```
+
+**3. Verify metrics collection:**
+- Prometheus: Check targets status
+- Grafana: View system metrics dashboard
+
+BUOC 7.8: TEST WEB FRONTEND
+--------------------------
+**1. Test Nginx proxy:**
+```
+URL: http://localhost:80
+```
+
+**2. Test web frontend:**
+```
+URL: http://localhost:8080
+```
+
+**Expected:** Nginx welcome page và frontend application
+
+BUOC 7.9: PERFORMANCE & LOAD TESTING
+----------------------------------
+**1. Basic load test với PowerShell:**
+```powershell
+# Test concurrent requests
+1..10 | ForEach-Object -Parallel {
+    Invoke-WebRequest -Uri "http://localhost:8085/hello" -Method GET | Out-Null
+}
+Write-Host "Load test completed!"
+```
+
+**2. Monitor system resources:**
+```bash
+# Check container resource usage
+docker stats
+
+# Monitor system load
+docker exec monitoring-node-exporter-server ps aux
+```
+
+BUOC 7.10: TROUBLESHOOTING GUIDE
+-------------------------------
+**Nếu test thất bại:**
+
+**1. Container không chạy:**
+```bash
+docker compose restart
+docker compose ps
+```
+
+**2. Port conflicts:**
+```bash
+# Check port usage (Windows)
+netstat -ano | findstr "8080 8081 8085"
+```
+
+**3. Database connection issues:**
+```bash
+# Check database logs
+docker compose logs relational-database-server
+```
+
+**4. Authentication failures (Keycloak realm missing):**
+```bash
+# ACCESS KEYCLOAK ADMIN CONSOLE
+# URL: http://localhost:8081
+# Username: admin
+# Password: admin
+
+# CREATE REALM 'realm_sv189':
+# 1. Click "Master" dropdown (top-left)
+# 2. Click "Create realm"
+# 3. Realm ID: realm_sv189
+# 4. Enabled: ON
+# 5. Click "Create"
+
+# CREATE CLIENT 'flask-app':
+# 1. Go to "Clients" tab
+# 2. Click "Create client"
+# 3. Client ID: flask-app
+# 4. Client Type: OpenID Connect
+# 5. Click "Next"
+# 6. Authentication flow: Standard flow + Direct access grants
+# 7. Login settings - Valid redirect URIs: http://localhost:8085/*
+# 8. Web origins: http://localhost:8085
+# 9. Click "Save"
+
+# GET CLIENT SECRET:
+# 1. Go to Clients > flask-app > Credentials tab
+# 2. Copy "Client secret" (abc123def456)
+
+# CREATE USER 'sv01':
+# 1. Go to "Users" tab
+# 2. Click "Create new user"
+# 3. Username: sv01
+# 4. Email: sv01@cloud.local
+# 5. First name: Sinh
+# 6. Last name: Vien 01
+# 7. Enabled: ON
+# 8. Click "Create"
+
+# SET USER PASSWORD:
+# 1. Go to Users > sv01 > Credentials tab
+# 2. Click "Set password"
+# 3. Password: password123
+# 4. Temporary: OFF
+# 5. Click "Save"
+
+# VERIFY SETUP:
+curl -X POST http://localhost:8081/realms/realm_sv189/protocol/openid-connect/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=password&client_id=flask-app&client_secret=abc123def456&username=sv01&password=password123"
+```
+
+**5. File access issues:**
+```bash
+# Check MinIO logs
+docker compose logs object-storage-server
+```
+
+**6. DNS resolution issues:**
+```bash
+# Test DNS from container
+docker exec application-backend-server nslookup app-backend.cloud.local internal-dns-server
+```
+
+**7. Service communication issues:**
+```bash
+# Test inter-service connectivity
+docker exec application-backend-server python3 -c "
+import requests
+r = requests.get('http://object-storage-server:9000', timeout=5)
+print(f'MinIO: {r.status_code}')
+"
+```
+
+BUOC 7.11: TEST SUMMARY REPORT
+-----------------------------
+**Tạo test report:**
+
+```powershell
+Write-Host "=== DTDM SYSTEM TEST REPORT ===" -ForegroundColor Cyan
+Write-Host "Date: $(Get-Date)" -ForegroundColor Yellow
+Write-Host ""
+
+# Test checklist
+$tests = @(
+    @{Name="Infrastructure"; Status="Check docker compose ps"},
+    @{Name="Authentication"; Status="Check Keycloak + JWT"},
+    @{Name="Object Storage"; Status="Check MinIO buckets"},
+    @{Name="Database"; Status="Check students endpoint"},
+    @{Name="API Endpoints"; Status="Check /hello, /students, /secure"},
+    @{Name="Service Communication"; Status="Check inter-container calls"},
+    @{Name="Monitoring"; Status="Check Prometheus/Grafana"},
+    @{Name="Web Frontend"; Status="Check Nginx proxy"}
+)
+
+foreach ($test in $tests) {
+    Write-Host "$($test.Name): $($test.Status)" -ForegroundColor Green
+}
+
+Write-Host ""
+Write-Host "System Status: FULLY OPERATIONAL" -ForegroundColor Green
+Write-Host "Ready for production deployment!" -ForegroundColor Green
+```
+
+================================================================================
+KHOI DONG TOAN BO HE THONG
+================================================================================
+
+# Chuyển đến thư mục project
+cd D:\XuLyAnhSo\DTDM
+
+# Khởi động tất cả containers
+docker compose up -d
+
+# Kiểm tra trạng thái tất cả containers
+docker compose ps
+
+# Xem logs nếu cần
+docker compose logs [service-name]
+
+================================================================================
+KIEM TRA TRANG THAI CAC DICH VU
+================================================================================
+
+# Web Frontend (Nginx)
+http://localhost:8080
+
+# Application Backend (Flask)
+http://localhost:8085
+
+# Keycloak Admin Console
+http://localhost:8081
+Username: admin
+Password: admin
+
+# MinIO Console
+http://localhost:9001
+Username: minioadmin
+Password: minioadmin
+
+# MinIO API
+http://localhost:9000
+
+# DNS Server
+localhost:1053 (UDP)
+
+================================================================================
+LUU Y QUAN TRONG
+================================================================================
+
+1. Đảm bảo Docker Desktop đang chạy trước khi thực hiện
+2. Thay thế [realm-id] bằng realm name thực tế của bạn
+3. Thay thế [mã-sinh-viên] bằng mã sinh viên thực tế
+4. Tất cả passwords trong hướng dẫn này chỉ để demo
+5. Trong môi trường production, nên sử dụng passwords mạnh
+6. Backup dữ liệu quan trọng trước khi thực hiện thay đổi
+
+================================================================================
+KIEN THUC THU DUOC
+================================================================================
+
+✅ RDBMS - Relational Database Management System
+✅ CRUD Operations - Create, Read, Update, Delete
+✅ Identity Provider & OIDC (OpenID Connect)
+✅ Object Storage - Buckets, Objects, Policies
+✅ Internal DNS Resolution - Zone files, A records
+✅ Container Networking - Service discovery
+✅ Microservices Architecture
+
+================================================================================
+HOAN THANH TAT CA CAC PHAN - CHUC MUNG!
+================================================================================

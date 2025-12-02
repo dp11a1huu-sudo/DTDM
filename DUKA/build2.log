@@ -1,0 +1,10 @@
+Build started at 11:35 AM...
+1>------ Build started: Project: GUI, Configuration: Debug Any CPU ------
+1>C:\CNPM_SANBONG\DUKA\GUI\Forms\LoginForm.cs(82,17,82,25): error CS0246: The type or namespace name 'BUS_User' could not be found (are you missing a using directive or an assembly reference?)
+1>C:\CNPM_SANBONG\DUKA\GUI\Forms\LoginForm.cs(82,40,82,48): error CS0246: The type or namespace name 'BUS_User' could not be found (are you missing a using directive or an assembly reference?)
+1>C:\CNPM_SANBONG\DUKA\GUI\Forms\LoginForm.cs(83,17,83,25): error CS0246: The type or namespace name 'DTO_User' could not be found (are you missing a using directive or an assembly reference?)
+1>C:\CNPM_SANBONG\DUKA\GUI\Forms\ResetPasswordForm.Designer.cs(158,45,158,65): warning CS0169: The field 'ResetPasswordForm.btnToggleNewPassword' is never used
+1>C:\CNPM_SANBONG\DUKA\GUI\Forms\ResetPasswordForm.Designer.cs(159,45,159,69): warning CS0169: The field 'ResetPasswordForm.btnToggleConfirmPassword' is never used
+========== Build: 0 succeeded, 1 failed, 3 up-to-date, 0 skipped ==========
+========== Build completed at 11:35 AM and took 01.967 seconds ==========
+

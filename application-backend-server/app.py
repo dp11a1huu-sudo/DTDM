@@ -26,7 +26,7 @@ def connect_db():
                 password="root",
                 database="minicloud"   # FIXED DB NAME
             )
-            print("Database connected")
+            print("✔ Database connected")
             return db
         except Exception as e:
             print(" Waiting for database...", e)

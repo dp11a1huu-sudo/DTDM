@@ -1,0 +1,6 @@
+C:\CNPM_SANBONG\DUKA\DTO\bin\Debug\DTO.dll
+C:\CNPM_SANBONG\DUKA\DTO\bin\Debug\DTO.pdb
+C:\CNPM_SANBONG\DUKA\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+C:\CNPM_SANBONG\DUKA\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\CNPM_SANBONG\DUKA\DTO\obj\Debug\DTO.dll
+C:\CNPM_SANBONG\DUKA\DTO\obj\Debug\DTO.pdb

@@ -1,0 +1,82 @@
+═══════════════════════════════════════════════════════════════
+HƯỚNG DẪN KIỂM TRA VÀ SỬA LỖI LOGO KHÔNG HIỂN THỊ
+═══════════════════════════════════════════════════════════════
+
+ĐÃ HOÀN THÀNH:
+✅ Logo đã được thêm vào Resources.resx (base64)
+✅ Resources.Designer.cs đã được tạo
+✅ Code LoadLogo() đã được cập nhật
+✅ GUI.csproj đã được cập nhật
+
+BƯỚC 1: REBUILD PROJECT TRONG VISUAL STUDIO
+─────────────────────────────────────────────
+1. Mở Visual Studio 2022
+2. Mở Solution DUKA.sln
+3. Click chuột phải vào project "GUI" trong Solution Explorer
+4. Chọn "Rebuild" (KHÔNG phải Build)
+5. Đợi quá trình rebuild hoàn tất
+6. Kiểm tra Output window xem có lỗi không
+
+BƯỚC 2: KIỂM TRA LỖI COMPILE
+──────────────────────────────
+1. Mở Output window (View > Output)
+2. Kiểm tra xem có lỗi nào liên quan đến Resources không
+3. Nếu có lỗi, xóa file Resources.Designer.cs và rebuild lại
+
+BƯỚC 3: KIỂM TRA DEBUG OUTPUT
+───────────────────────────────
+1. Chạy ứng dụng ở chế độ Debug (F5)
+2. Mở Output window (View > Output)
+3. Chọn "Debug" trong dropdown
+4. Tìm các dòng:
+   - "Logo đã được load thành công!" → Logo đã load OK
+   - "Logo là null!" → Logo chưa được load từ Resources
+   - "Lỗi khi load logo: ..." → Có lỗi xảy ra
+
+BƯỚC 4: KIỂM TRA TRỰC TIẾP
+───────────────────────────
+1. Mở file LoginForm.cs
+2. Đặt breakpoint tại dòng: var logo = Properties.Resources.DUKA_Logo;
+3. Chạy Debug (F5)
+4. Khi dừng tại breakpoint, kiểm tra giá trị của biến "logo"
+   - Nếu logo != null → Logo đã được load
+   - Nếu logo == null → Logo chưa được load
+
+BƯỚC 5: NẾU VẪN KHÔNG HIỂN THỊ
+────────────────────────────────
+1. Kiểm tra PictureBox có Visible = true không:
+   - Mở LoginForm.Designer.cs
+   - Tìm pictureBoxLogo
+   - Đảm bảo không có dòng: pictureBoxLogo.Visible = false;
+
+2. Kiểm tra PictureBox có trong panelLeft không:
+   - Mở LoginForm.Designer.cs
+   - Tìm panelLeft.Controls.Add
+   - Đảm bảo có: this.panelLeft.Controls.Add(this.pictureBoxLogo);
+
+3. Thử set Image trực tiếp:
+   - Thêm vào LoadLogo():
+     pictureBoxLogo.Image = Properties.Resources.DUKA_Logo;
+     pictureBoxLogo.SizeMode = PictureBoxSizeMode.Zoom;
+     pictureBoxLogo.Visible = true;
+
+BƯỚC 6: XÓA VÀ TẠO LẠI RESOURCES.DESIGNER.CS
+──────────────────────────────────────────────
+Nếu vẫn không được:
+1. Xóa file Properties/Resources.Designer.cs
+2. Trong Visual Studio:
+   - Click chuột phải vào Resources.resx
+   - Chọn "Run Custom Tool"
+3. Hoặc rebuild project để Visual Studio tự động tạo lại
+
+LƯU Ý QUAN TRỌNG:
+──────────────────
+- PHẢI rebuild trong Visual Studio, KHÔNG dùng dotnet CLI
+- Đảm bảo không có lỗi compile
+- Kiểm tra Output window để xem debug messages
+- Logo sẽ hiển thị ở vị trí (100, 200) trong panelLeft
+- Kích thước: 200x150 pixels
+- SizeMode: Zoom (tự động scale)
+
+═══════════════════════════════════════════════════════════════
+
