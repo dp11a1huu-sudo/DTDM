@@ -11,6 +11,7 @@ services:
 
   # Phần mở rộng: Web server thứ 2 cho Load Balancing (Round Robin)
   web-frontend-server-2:
+    build: ./web-frontend-server
     image: tronghuu128/web:dev
     container_name: web-frontend-server-2
     networks: [cloud-net]
@@ -25,8 +26,8 @@ services:
     networks: [cloud-net]
     ports: ["8085:8081"]
     environment:
-      OIDC_ISSUER: "http://authentication-identity-server:8080/realms/realm_sv189"
-      OIDC_ISSUER_EXPECTED: "http://localhost:8081/realms/realm_sv189"
+      OIDC_ISSUER: "http://authentication-identity-server:8080/realms/realm_sv110"
+      OIDC_ISSUER_EXPECTED: "http://localhost:8081/realms/realm_sv110"
       OIDC_AUDIENCE: "account"
     restart: unless-stopped
 
