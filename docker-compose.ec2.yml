@@ -5,7 +5,7 @@ services:
   # Keycloak (JVM) la service ton nhieu RAM nhat -> gioi han heap
   authentication-identity-server:
     environment:
-      JAVA_OPTS_APPEND: "-Xms64m -Xmx320m -XX:+UseSerialGC"
+      JAVA_OPTS_APPEND: "-Xms64m -Xmx320m"
 
   # MariaDB: giam buffer pool + tat performance_schema
   relational-database-server:
