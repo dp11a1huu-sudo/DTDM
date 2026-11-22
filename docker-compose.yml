@@ -27,7 +27,7 @@ services:
     ports: ["8085:8081"]
     environment:
       OIDC_ISSUER: "http://authentication-identity-server:8080/realms/realm_sv110"
-      OIDC_ISSUER_EXPECTED: "http://localhost:8081/realms/realm_sv110"
+      OIDC_ISSUER_EXPECTED: "${OIDC_ISSUER_EXPECTED:-http://localhost:8081/realms/realm_sv110}"
       OIDC_AUDIENCE: "account"
     restart: unless-stopped
 
@@ -46,13 +46,16 @@ services:
   authentication-identity-server:
     image: quay.io/keycloak/keycloak:latest
     container_name: authentication-identity-server
-    command: ["start-dev", "--spi-login-protocol--openid-connect--allow-oidc-params-in-redirect-uris=true"]
+    command: ["start-dev", "--import-realm", "--spi-login-protocol--openid-connect--allow-oidc-params-in-redirect-uris=true"]
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
-      KC_HOSTNAME: "localhost"
+      KC_HOSTNAME: "${KC_HOSTNAME:-localhost}"
       KC_HOSTNAME_STRICT: "false"
       KC_HTTP_ENABLED: "true"
+      KC_PROXY_HEADERS: "xforwarded"
+    volumes:
+      - ./authentication-identity-server/realm_sv110.json:/opt/keycloak/data/import/realm_sv110.json:ro
     ports: ["8081:8080"]
     restart: unless-stopped
     networks: [cloud-net]

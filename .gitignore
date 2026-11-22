@@ -1,0 +1,5 @@
+# Sinh tự động bởi start-codespaces.sh (chứa domain Codespaces)
+.env
+
+# Dữ liệu MinIO cục bộ
+object-storage-server/data/

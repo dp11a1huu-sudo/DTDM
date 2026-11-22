@@ -1,0 +1,21 @@
+{
+  "name": "DTDM MiniCloud",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": true
+    }
+  },
+  "forwardPorts": [80, 3000, 8080, 8081, 8085, 9000, 9001, 9090, 9100],
+  "portsAttributes": {
+    "80": { "label": "API Gateway", "visibility": "public" },
+    "8080": { "label": "Web Server", "visibility": "public" },
+    "8081": { "label": "Keycloak", "visibility": "public" },
+    "8085": { "label": "App Backend", "visibility": "public" },
+    "9001": { "label": "MinIO Console", "visibility": "public" },
+    "9090": { "label": "Prometheus", "visibility": "public" },
+    "3000": { "label": "Grafana", "visibility": "public" }
+  },
+  "postCreateCommand": "docker --version && docker compose version"
+}
