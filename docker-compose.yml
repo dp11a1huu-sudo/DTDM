@@ -16,7 +16,10 @@ services:
     container_name: web-frontend-server-2
     networks: [cloud-net]
     volumes:
-      - ./web-frontend-server/html2:/usr/share/nginx/html:ro
+      # Dung chung noi dung day du (blog + anh) voi server 1
+      - ./web-frontend-server/html:/usr/share/nginx/html:ro
+      # Chi ghi de index.html de phan biet "Web Server 2" khi demo Load Balancing
+      - ./web-frontend-server/html2/index.html:/usr/share/nginx/html/index.html:ro
     restart: unless-stopped
 
   application-backend-server:
