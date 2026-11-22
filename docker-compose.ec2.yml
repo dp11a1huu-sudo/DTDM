@@ -1,0 +1,28 @@
+# Override danh rieng cho EC2 t3.micro (1 GiB RAM).
+# Dung kem: docker compose -f docker-compose.yml -f docker-compose.ec2.yml up -d
+# Muc dich: giam bo nho cac service nang de khong bi OOM-kill tren may nho.
+services:
+  # Keycloak (JVM) la service ton nhieu RAM nhat -> gioi han heap
+  authentication-identity-server:
+    environment:
+      JAVA_OPTS_APPEND: "-Xms64m -Xmx320m -XX:MaxMetaspaceSize=128m"
+
+  # MariaDB: giam buffer pool + tat performance_schema
+  relational-database-server:
+    command:
+      - "--innodb-buffer-pool-size=96M"
+      - "--performance-schema=OFF"
+      - "--max-connections=50"
+
+  # Prometheus: chi giu du lieu 1 ngay
+  monitoring-prometheus-server:
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=1d"
+
+  # Grafana: tat analytics/telemetry
+  monitoring-grafana-dashboard-server:
+    environment:
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_NEWS_NEWS_FEED_ENABLED: "false"
